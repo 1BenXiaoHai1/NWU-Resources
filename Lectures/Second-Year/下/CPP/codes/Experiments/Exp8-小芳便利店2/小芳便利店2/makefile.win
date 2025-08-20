@@ -1,0 +1,37 @@
+# Project: 小芳便利店2
+# Makefile created by Red Panda C++ 0.14.0
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = 小芳便利店2_private.res
+OBJ      = main.o Store.o $(RES)
+LINKOBJ  = main.o Store.o $(RES)
+CLEANOBJ  =  main.o Store.o $(RES)
+LIBS     =  -static
+INCS     =  
+CXXINCS  =  
+BIN      = 小芳便利店2.exe
+CXXFLAGS = $(CXXINCS)  -O2 -g3 -pipe -D__DEBUG__
+CFLAGS   = $(INCS)  -O2 -g3 -pipe -D__DEBUG__
+RM       = del /q /f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(CLEANOBJ) $(BIN) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp Store.h
+	$(CPP) -c D:/Desktop/Experiment/CPP/实验八-小芳便利店2/小芳便利店2/main.cpp -o main.o $(CXXFLAGS)  -finput-charset=gbk -fexec-charset=gbk
+
+Store.o: Store.cpp Store.h
+	$(CPP) -c D:/Desktop/Experiment/CPP/实验八-小芳便利店2/小芳便利店2/Store.cpp -o Store.o $(CXXFLAGS)  -finput-charset=gbk -fexec-charset=gbk
+
+小芳便利店2_private.res: 小芳便利店2_private.rc 
+	$(WINDRES) -i 小芳便利店2_private.rc --input-format=rc -o 小芳便利店2_private.res -O coff 
+

@@ -1,0 +1,34 @@
+# Project: 对角行列式与高阶行列式计算
+# Makefile created by Red Panda C++ 0.14.0
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = 对角行列式与高阶行列式计算_private.res
+OBJ      = main.o $(RES)
+LINKOBJ  = main.o $(RES)
+CLEANOBJ  =  main.o $(RES)
+LIBS     = 
+INCS     =  
+CXXINCS  =  
+BIN      = 对角行列式与高阶行列式计算.exe
+CXXFLAGS = $(CXXINCS)  -Wall -Wextra -g3 -pipe -D__DEBUG__
+CFLAGS   = $(INCS)  -Wall -Wextra -g3 -pipe -D__DEBUG__
+RM       = del /q /f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(CLEANOBJ) $(BIN) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c D:/Desktop/上机作业/工程数学/对角行列式与高阶行列式计算/main.cpp -o main.o $(CXXFLAGS)  -finput-charset=gbk -fexec-charset=gbk
+
+对角行列式与高阶行列式计算_private.res: 对角行列式与高阶行列式计算_private.rc 
+	$(WINDRES) -i 对角行列式与高阶行列式计算_private.rc --input-format=rc -o 对角行列式与高阶行列式计算_private.res -O coff 
+

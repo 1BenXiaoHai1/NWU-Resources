@@ -1,0 +1,34 @@
+# Project: Monte Carlo
+# Makefile created by Red Panda Dev-C++ beta.0.12.2
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = Monte_Carlo_private.res
+OBJ      = main.o $(RES)
+LINKOBJ  = main.o $(RES)
+CLEANOBJ  =  main.o $(RES)
+LIBS     = 
+INCS     =  
+CXXINCS  =  
+BIN      = "Monte Carlo.exe"
+CXXFLAGS = $(CXXINCS)  -Wall -Wextra -g3 -pipe -D__DEBUG__
+CFLAGS   = $(INCS)  -Wall -Wextra -g3 -pipe -D__DEBUG__
+RM       = del /q /f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(CLEANOBJ) $(BIN) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c "D:/Desktop/上机作业/C++程序设计/Monte Carlo/main.cpp" -o main.o $(CXXFLAGS)  -finput-charset=gbk -fexec-charset=gbk
+
+Monte_Carlo_private.res: Monte_Carlo_private.rc 
+	$(WINDRES) -i Monte_Carlo_private.rc --input-format=rc -o Monte_Carlo_private.res -O coff 
+

@@ -1,0 +1,43 @@
+# Project: 员工和工资
+# Makefile created by Red Panda C++ 0.14.0
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = 员工和工资_private.res
+OBJ      = main.o Basic.o Employees.o Employee.o $(RES)
+LINKOBJ  = main.o Basic.o Employees.o Employee.o $(RES)
+CLEANOBJ  =  main.o Basic.o Employees.o Employee.o $(RES)
+LIBS     =  -static
+INCS     =  
+CXXINCS  =  
+BIN      = 员工和工资.exe
+CXXFLAGS = $(CXXINCS)  -O2 -g3 -pipe -D__DEBUG__
+CFLAGS   = $(INCS)  -O2 -g3 -pipe -D__DEBUG__
+RM       = del /q /f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(CLEANOBJ) $(BIN) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp Employees.h Employee.h Basic.h
+	$(CPP) -c D:/Desktop/Experiment/CPP/建立工资管理系统/员工和工资/main.cpp -o main.o $(CXXFLAGS)  -finput-charset=gbk -fexec-charset=gbk
+
+Basic.o: Basic.cpp Basic.h
+	$(CPP) -c D:/Desktop/Experiment/CPP/建立工资管理系统/员工和工资/Basic.cpp -o Basic.o $(CXXFLAGS)  -finput-charset=gbk -fexec-charset=gbk
+
+Employees.o: Employees.cpp Employees.h Employee.h Basic.h
+	$(CPP) -c D:/Desktop/Experiment/CPP/建立工资管理系统/员工和工资/Employees.cpp -o Employees.o $(CXXFLAGS)  -finput-charset=gbk -fexec-charset=gbk
+
+Employee.o: Employee.cpp Employee.h Basic.h
+	$(CPP) -c D:/Desktop/Experiment/CPP/建立工资管理系统/员工和工资/Employee.cpp -o Employee.o $(CXXFLAGS)  -finput-charset=gbk -fexec-charset=gbk
+
+员工和工资_private.res: 员工和工资_private.rc 
+	$(WINDRES) -i 员工和工资_private.rc --input-format=rc -o 员工和工资_private.res -O coff 
+

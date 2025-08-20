@@ -1,0 +1,37 @@
+# Project: 2.1顺序表删除重复元素
+# Makefile created by Red Panda C++ 1.2
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = 2_private.res
+OBJ      = main.o ArrayList_Function.o $(RES)
+LINKOBJ  = main.o ArrayList_Function.o $(RES)
+CLEANOBJ  =  main.o ArrayList_Function.o 2_private.res 2.1顺序表删除重复元素.exe
+LIBS     = 
+INCS     =  
+CXXINCS  =  
+BIN      = 2.1顺序表删除重复元素.exe
+CXXFLAGS = $(CXXINCS)  -g3 -pipe -Wall -Wextra -D__DEBUG__
+CFLAGS   = $(INCS)  -g3 -pipe -Wall -Wextra -D__DEBUG__
+RM       = del /q /f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(CLEANOBJ) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.c ArrayList.h
+	$(CC) -c "D:/Desktop/Experiment/数据结构/实验课/实验二 线性表及其应用/2.1顺序表删除重复元素/main.c" -o main.o $(CFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+ArrayList_Function.o: ArrayList_Function.c ArrayList.h
+	$(CC) -c "D:/Desktop/Experiment/数据结构/实验课/实验二 线性表及其应用/2.1顺序表删除重复元素/ArrayList_Function.c" -o ArrayList_Function.o $(CFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+2_private.res: 2_private.rc 
+	$(WINDRES) -i 2_private.rc --input-format=rc -o 2_private.res -O coff 
+

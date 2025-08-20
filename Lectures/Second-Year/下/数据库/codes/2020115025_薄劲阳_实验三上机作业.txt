@@ -1,0 +1,104 @@
+--实验三
+
+--插入一条学生记录————insert into table（） values（）语句
+insert into student(
+	sno,
+	sname,
+	sex,
+	sage,
+	dno,
+	dormno
+)
+values(
+	'980101',
+	'陈红',
+	'女',
+	21,
+	'4',
+	'2303'
+);
+
+select *from student;
+
+--在DEPARTMENT院系表中插入历史系————insert 语句
+select *from department; --先看一看department表中有没有历史系
+insert into department(
+	dno,
+	dname
+)
+values(
+	'5',
+	'历史系'
+);
+
+select *from department;
+
+--创建数据表Gradel表 将”99“级学生选修数据库原理的、没有分数的学生插入到Gradel表中
+
+--查询
+select *from grade
+select *from student 
+	where sno in (select sno from grade where LEFT(sno,2)='99' and cno ='01' and score is NULL)  
+
+--创建Gradel表
+create table Gradel(
+	sno char(6) primary key,-- 设置sno为主码
+	sname char(8),
+	sex char(2),
+	sage Int,
+	dno char(4),
+	dormno char(5),
+);
+
+--插入元素到Gradel表中
+insert into Gradel(
+	sno,
+	sname,
+	sex,
+	sage,
+	dno,
+	dormno
+)
+select *from student 
+	where sno in (select sno from grade where LEFT(sno,2)='99') and ()
+
+
+--修改学号为980101的学生姓名为陈弘 年龄为20————update...set...where...语句
+select *from student;
+
+update student
+set sname = '陈弘'
+where sno = '980101';
+
+select *from student; -- 检查是否修改成功
+
+--将course课程信息中没有先修课的课程的学分增加2分——数据的更新update语句
+select *from course where cpno is NULL; -- 空值语句的查询要用is NULL 而不能用 = NULL来查询
+
+update course
+set credit = credit + 2
+where cpno is NULL;
+
+select *from course where cpno is NULL; -- 查询判断是否更改成功
+
+
+--将物理系的所有学生的数据库原理成绩置为零分
+select *from student where dno in (select dno from department where dno = '3');--查询物理系的学生
+
+update grade
+set score = 0
+where sno in
+	(
+		select sno from student where dno = '3'
+	) and cno = '01'; --限制条件——在学生表中查询学号（所要查询的学号的系为物理系3）
+	
+select *from grade where sno in (select sno from student where dno = '3');--判断是否修改成功
+
+--删除98级所有学生的信息————delete语句
+select *from student where LEFT(sno,2)='98'; --查询98级学生 使用数据库自带left函数截取字符串
+
+delete 
+from student
+where LEFT(sno,2)='98';
+
+select *from student where LEFT(sno,2)='98'; --查询是否删除成功

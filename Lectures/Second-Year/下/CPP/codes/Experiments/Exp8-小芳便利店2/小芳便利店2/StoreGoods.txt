@@ -1,0 +1,6 @@
+Bread 1.0
+Cocacola 1.0
+Beer 1.0
+Chocalate 1.0
+Pencil 0.5
+Notebook 3.0
